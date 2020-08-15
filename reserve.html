@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron justify-content-center">
+        <h1>Sleepy Joe's Diner</h1>
+        <hr />
+        <h2>Make Your Reservation</h2>
+        <a href="/tables">
+          <button class="table-btn">View Tables</button>
+        </a>
+        <a href="/">
+          <button class="table-btn">Home</button>
+        </a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3>Table Reservation</h3>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" placeholder="Donald Trump" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="text" id="phone" placeholder="555-420-6969" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="text"
+                id="email"
+                placeholder="something@nothing.com"
+              />
+            </div>
+            <div class="form-group">
+              <label for="auth">Authorization Code</label>
+              <input
+                type="text"
+                id="auth"
+                placeholder="A passphrase/number you can remember!"
+              />
+            </div>
+            <button class="submit-btn" id="makeRes">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $("#makeRes").on("click", function (event) {
+        event.preventDefault();
+        const newRes = {
+          name: $("#name").val().trim(),
+          phone: $("#phone").val().trim(),
+          email: $("#email").val().trim(),
+          auth: $("#auth").val().trim(),
+        };
+        $.post("/api/reservations", newRes)
+        .then(function(data){
+            console.log("reserve.html", data)
+            alert("You've been booked!")
+        })
+      });
+    </script>
+  </body>
+</html>
